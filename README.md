@@ -110,7 +110,12 @@ Baixe o ZIP do projeto ou receba uma cópia da pasta completa e extraia os arqui
 
 Abra essa pasta no VS Code e use **Terminal → Novo Terminal**. Também é possível usar o terminal do sistema. Execute os comandos na raiz, onde está este README.
 
-O projeto ainda não tem um endereço de repositório público registrado nesta documentação. Quando houver publicação, o link de clone ou download deve ser incluído aqui.
+Repositório: [Recuperação Judicial das Empresas Brasileiras](https://github.com/Pedrox0944/Recupera-oJudicialdasEmpresasBrasileiras). Para obter uma cópia com Git:
+
+```sh
+git clone https://github.com/Pedrox0944/Recupera-oJudicialdasEmpresasBrasileiras.git
+cd Recupera-oJudicialdasEmpresasBrasileiras
+```
 
 ### 2. Conferir o Python
 
