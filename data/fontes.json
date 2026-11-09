@@ -1,0 +1,65 @@
+[
+  {
+    "id": "S01",
+    "titulo": "Administrador judicial — primeira RJ Oi",
+    "url": "https://recuperacaojudicialoi.com.br/inicio/",
+    "escopo": "Pedido, deferimento, número do processo e sentença de encerramento. Não usar como status atual da companhia.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S02",
+    "titulo": "Oi — Q&A 4T22",
+    "url": "https://ri.oi.com.br/qa-duvidas-acionistas-individuais-divulgacao-de-resultados-4t22/",
+    "escopo": "Novo pedido em março de 2023; dia do pedido ainda não confirmado.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S03",
+    "titulo": "Viver — Linha do tempo",
+    "url": "https://ri.viver.com.br/a-companhia/linha-do-tempo/",
+    "escopo": "IPO em 2007, pedido em 2016, saída em 2021. Precisão anual.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S04",
+    "titulo": "Lupatech — DFP 2024, nota 32, página 64 do PDF",
+    "url": "https://lupatech.globalri.com.br/upload/files/4016_DFP2024-Completo-Portugues-Lupatech.pdf",
+    "escopo": "Pedido 25/05/2015; deferimento 22/06/2015; encerramento 14/03/2023; trânsito 21/06/2023.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S05",
+    "titulo": "Eternit — apresentação 1T18, página 12 do PDF",
+    "url": "https://ri.eternit.com.br/Download.aspx?Arquivo=IuTc6Wz2XjsYyA1RHODg+Q%3D%3D&linguagem=pt",
+    "escopo": "Pedido 19/03/2018; deferimento 16/04/2018. Não estabelece status em 2026.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S06",
+    "titulo": "B3 — comunicado Renova, 17/10/2019",
+    "url": "https://www.b3.com.br/pt_br/noticias/comunicado-8AE490C96DD294C4016DDB50545E215C.htm",
+    "escopo": "Confirma condição de recuperação e negociação em bolsa em outubro de 2019; não determina dia do pedido.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S07",
+    "titulo": "CVM — cadastro de companhias",
+    "url": "https://dados.cvm.gov.br/dataset/cia_aberta-cad",
+    "escopo": "Fonte prevista para normalizar identidades; cadastro ainda não incorporado.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S08",
+    "titulo": "Metabase — PostgreSQL",
+    "url": "https://www.metabase.com/docs/latest/databases/connections/postgresql",
+    "escopo": "Documentação de conexão para a etapa de implementação.",
+    "consulta": "2026-11-09"
+  },
+  {
+    "id": "S09",
+    "titulo": "Lei 11.101/2005 — texto compilado",
+    "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11101compilado.htm",
+    "escopo": "Marco legal; distinguir encerramento jurídico de recuperação econômica.",
+    "consulta": "2026-11-09"
+  }
+]

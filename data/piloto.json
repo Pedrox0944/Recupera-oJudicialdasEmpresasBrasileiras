@@ -1,0 +1,128 @@
+{
+  "data_corte_proposta": "2026-11-09",
+  "consulta": "2026-11-09",
+  "cobertura": "amostra intencional, incompleta; sem estimativa nacional",
+  "registros": [
+    {
+      "id": "P01",
+      "empresa": "Oi S.A.",
+      "episodio": 1,
+      "pedido": "2016-06-20",
+      "deferimento": "2016-06-29",
+      "encerramento": "2022-12-14",
+      "ano_pedido": 2016,
+      "ano_encerramento": 2022,
+      "processo": "0203711-65.2016.8.19.0001",
+      "evento": "encerramento_reportado",
+      "fontes": [
+        "S01"
+      ],
+      "observacao": "Novo episódio em 2023 documentado em P02. Status atual não auditado.",
+      "cnpj": null,
+      "status_no_corte": "nao_auditado",
+      "elegibilidade": "pendente_validacao",
+      "uso": "piloto_nao_inferencial"
+    },
+    {
+      "id": "P02",
+      "empresa": "Oi S.A.",
+      "episodio": 2,
+      "pedido": null,
+      "deferimento": "2023-03-17",
+      "encerramento": null,
+      "ano_pedido": 2023,
+      "mes_pedido": 3,
+      "ano_encerramento": null,
+      "processo": null,
+      "evento": "novo_pedido_reportado",
+      "fontes": [
+        "S02"
+      ],
+      "observacao": "Não classificar como em andamento: falta atualização até o corte.",
+      "cnpj": null,
+      "status_no_corte": "nao_auditado",
+      "elegibilidade": "pendente_validacao",
+      "uso": "piloto_nao_inferencial"
+    },
+    {
+      "id": "P03",
+      "empresa": "Viver Incorporadora e Construtora S.A.",
+      "episodio": 1,
+      "pedido": null,
+      "deferimento": null,
+      "encerramento": null,
+      "ano_pedido": 2016,
+      "ano_encerramento": 2021,
+      "processo": null,
+      "evento": "saida_reportada_ano",
+      "fontes": [
+        "S03"
+      ],
+      "observacao": "Precisão anual; obter sentença e datas exatas.",
+      "cnpj": null,
+      "status_no_corte": "nao_auditado",
+      "elegibilidade": "pendente_validacao",
+      "uso": "piloto_nao_inferencial"
+    },
+    {
+      "id": "P04",
+      "empresa": "Lupatech S.A.",
+      "episodio": 1,
+      "pedido": "2015-05-25",
+      "deferimento": "2015-06-22",
+      "encerramento": "2023-03-14",
+      "ano_pedido": 2015,
+      "ano_encerramento": 2023,
+      "processo": null,
+      "evento": "encerramento_reportado",
+      "fontes": [
+        "S04"
+      ],
+      "observacao": "DFP informa trânsito em julgado em 21/06/2023. Acompanhamento posterior pendente.",
+      "cnpj": null,
+      "status_no_corte": "nao_auditado",
+      "elegibilidade": "pendente_validacao",
+      "uso": "piloto_nao_inferencial"
+    },
+    {
+      "id": "P05",
+      "empresa": "Eternit S.A.",
+      "episodio": 1,
+      "pedido": "2018-03-19",
+      "deferimento": "2018-04-16",
+      "encerramento": null,
+      "ano_pedido": 2018,
+      "ano_encerramento": null,
+      "processo": null,
+      "evento": "pedido_reportado",
+      "fontes": [
+        "S05"
+      ],
+      "observacao": "Desfecho não apurado. Ausência da data de encerramento não significa processo em curso.",
+      "cnpj": null,
+      "status_no_corte": "nao_auditado",
+      "elegibilidade": "pendente_validacao",
+      "uso": "piloto_nao_inferencial"
+    },
+    {
+      "id": "P06",
+      "empresa": "Renova Energia S.A.",
+      "episodio": 1,
+      "pedido": null,
+      "deferimento": null,
+      "encerramento": null,
+      "ano_pedido": 2019,
+      "ano_encerramento": null,
+      "processo": null,
+      "evento": "condicao_rj_reportada",
+      "fontes": [
+        "S06"
+      ],
+      "observacao": "B3 confirma RJ em 17/10/2019; buscar petição e desfecho. Data da publicação não é data do pedido.",
+      "cnpj": null,
+      "status_no_corte": "nao_auditado",
+      "elegibilidade": "pendente_validacao",
+      "uso": "piloto_nao_inferencial"
+    }
+  ]
+}
