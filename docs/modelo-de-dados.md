@@ -31,3 +31,7 @@ Não usar ticker como chave. Manter CNPJ como texto com 14 dígitos. Mudanças d
 
 ## Verificações da futura base
 Chaves únicas; fontes existentes; CNPJ válido; datas consistentes com o evento; listagem cobrindo o pedido; datas posteriores ao corte excluídas do retrato; duração nunca negativa; recursos sem perda de histórico. Precisão anual não entra no cálculo em dias.
+
+## Camada piloto implementada — versão 0.3
+
+`fonte`, `episodio_piloto`, `episodio_fonte` e `evidencia_campo` sustentam a execução local e a exportação PostgreSQL. A tabela de evidências preserva campo, valor, localização, consulta, precisão, situação e SHA-256 da cópia usada. Alternativas pendentes não substituem o valor do piloto. O esquema normalizado proposto acima continua planejado.

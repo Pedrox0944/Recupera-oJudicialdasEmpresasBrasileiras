@@ -15,10 +15,12 @@
       "processo": "0203711-65.2016.8.19.0001",
       "evento": "encerramento_reportado",
       "fontes": [
-        "S01"
+        "S01",
+        "S10",
+        "S11"
       ],
       "observacao": "Novo episódio em 2023 documentado em P02. Status atual não auditado.",
-      "cnpj": null,
+      "cnpj": "76535764000143",
       "status_no_corte": "nao_auditado",
       "elegibilidade": "pendente_validacao",
       "uso": "piloto_nao_inferencial"
@@ -27,19 +29,22 @@
       "id": "P02",
       "empresa": "Oi S.A.",
       "episodio": 2,
-      "pedido": null,
+      "pedido": "2023-03-01",
       "deferimento": "2023-03-17",
       "encerramento": null,
       "ano_pedido": 2023,
       "mes_pedido": 3,
       "ano_encerramento": null,
-      "processo": null,
+      "processo": "0090940-03.2023.8.19.0001",
       "evento": "novo_pedido_reportado",
       "fontes": [
-        "S02"
+        "S02",
+        "S10",
+        "S11",
+        "S12"
       ],
-      "observacao": "Não classificar como em andamento: falta atualização até o corte.",
-      "cnpj": null,
+      "observacao": "Pedido confirmado em documento de 11/10/2023. Processo migrado para DCP em 18/09/2023, sem criar novo episódio. Situação no corte ainda não auditada.",
+      "cnpj": "76535764000143",
       "status_no_corte": "nao_auditado",
       "elegibilidade": "pendente_validacao",
       "uso": "piloto_nao_inferencial"
@@ -48,18 +53,22 @@
       "id": "P03",
       "empresa": "Viver Incorporadora e Construtora S.A.",
       "episodio": 1,
-      "pedido": null,
-      "deferimento": null,
+      "pedido": "2016-09-16",
+      "deferimento": "2016-09-29",
       "encerramento": null,
       "ano_pedido": 2016,
       "ano_encerramento": 2021,
-      "processo": null,
+      "processo": "1103236-83.2016.8.26.0100",
       "evento": "saida_reportada_ano",
       "fontes": [
-        "S03"
+        "S03",
+        "S10",
+        "S13",
+        "S14",
+        "S15"
       ],
-      "observacao": "Precisão anual; obter sentença e datas exatas.",
-      "cnpj": null,
+      "observacao": "Pedido, deferimento e processo confirmados no relatório da administradora judicial. Fontes reportam sentença em 02/08/2021 e encerramento em 17/12/2021; campo encerramento mantido nulo até distinguir marcos. Ver evidencias.json.",
+      "cnpj": "67571414000141",
       "status_no_corte": "nao_auditado",
       "elegibilidade": "pendente_validacao",
       "uso": "piloto_nao_inferencial"
@@ -73,13 +82,15 @@
       "encerramento": "2023-03-14",
       "ano_pedido": 2015,
       "ano_encerramento": 2023,
-      "processo": null,
+      "processo": "1050924-67.2015.8.26.0100",
       "evento": "encerramento_reportado",
       "fontes": [
-        "S04"
+        "S04",
+        "S10",
+        "S16"
       ],
       "observacao": "DFP informa trânsito em julgado em 21/06/2023. Acompanhamento posterior pendente.",
-      "cnpj": null,
+      "cnpj": "89463822000112",
       "status_no_corte": "nao_auditado",
       "elegibilidade": "pendente_validacao",
       "uso": "piloto_nao_inferencial"
@@ -90,16 +101,19 @@
       "episodio": 1,
       "pedido": "2018-03-19",
       "deferimento": "2018-04-16",
-      "encerramento": null,
+      "encerramento": "2024-08-09",
       "ano_pedido": 2018,
-      "ano_encerramento": null,
-      "processo": null,
-      "evento": "pedido_reportado",
+      "ano_encerramento": 2024,
+      "processo": "1030930-48.2018.8.26.0100",
+      "evento": "encerramento_reportado",
       "fontes": [
-        "S05"
+        "S05",
+        "S10",
+        "S18",
+        "S17"
       ],
-      "observacao": "Desfecho não apurado. Ausência da data de encerramento não significa processo em curso.",
-      "cnpj": null,
+      "observacao": "Sentença de encerramento de 09/08/2024 conferida em cópia disponibilizada pelo RI. Elegibilidade histórica, recursos e acompanhamento até o corte pendentes.",
+      "cnpj": "61092037000181",
       "status_no_corte": "nao_auditado",
       "elegibilidade": "pendente_validacao",
       "uso": "piloto_nao_inferencial"
@@ -108,18 +122,21 @@
       "id": "P06",
       "empresa": "Renova Energia S.A.",
       "episodio": 1,
-      "pedido": null,
-      "deferimento": null,
-      "encerramento": null,
+      "pedido": "2019-10-16",
+      "deferimento": "2019-10-16",
+      "encerramento": "2025-02-12",
       "ano_pedido": 2019,
-      "ano_encerramento": null,
-      "processo": null,
-      "evento": "condicao_rj_reportada",
+      "ano_encerramento": 2025,
+      "processo": "1103257-54.2019.8.26.0100",
+      "evento": "encerramento_reportado",
       "fontes": [
-        "S06"
+        "S06",
+        "S10",
+        "S19",
+        "S20"
       ],
-      "observacao": "B3 confirma RJ em 17/10/2019; buscar petição e desfecho. Data da publicação não é data do pedido.",
-      "cnpj": null,
+      "observacao": "Relatório da administradora confirma pedido e deferimento em 16/10/2019. Comunicado reporta sentença de encerramento em 12/02/2025; sentença original, recursos e acompanhamento no corte pendentes.",
+      "cnpj": "08534605000174",
       "status_no_corte": "nao_auditado",
       "elegibilidade": "pendente_validacao",
       "uso": "piloto_nao_inferencial"

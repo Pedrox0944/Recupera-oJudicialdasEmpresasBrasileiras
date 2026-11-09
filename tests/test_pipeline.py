@@ -4,10 +4,11 @@ import json
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 from recuperacao.__main__ import main
-from recuperacao.pipeline import ROOT, build, cvm_candidates, load, validate
+from recuperacao.pipeline import ROOT, build, cvm_candidates, load, validate, load_evidence, validate_evidence
 
 
 class PipelineTests(unittest.TestCase):
@@ -49,7 +50,7 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue(any('mes_pedido inconsistente' in e for e in errors))
 
     def test_partial_date_after_cutoff_is_rejected(self):
-        self.pilot['registros'][1].update(ano_pedido=2026, mes_pedido=12)
+        self.pilot['registros'][1].update(pedido=None, ano_pedido=2026, mes_pedido=12)
         self.assertTrue(any('posterior ao corte' in e for e in validate(self.pilot, self.sources)))
 
     def test_invalid_cnpj_is_rejected(self):
@@ -77,11 +78,12 @@ class PipelineTests(unittest.TestCase):
         manifest = build(ROOT / 'data', self.root)
         self.assertIsNone(manifest['indicadores_juridicos'])
         self.assertEqual(manifest['contagens']['episodios_pesquisados'], 6)
-        with sqlite3.connect(self.root / 'piloto.sqlite3') as db:
-            self.assertEqual(db.execute('SELECT COUNT(*) FROM episodio_fonte').fetchone()[0], 6)
-            self.assertEqual(db.execute("SELECT pedido, ano_pedido FROM episodio_piloto WHERE id='P03'").fetchone(), (None, 2016))
+        with closing(sqlite3.connect(self.root / 'piloto.sqlite3')) as db:
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM episodio_fonte').fetchone()[0], sum(len(r['fontes']) for r in self.pilot['registros']))
+            self.assertEqual(db.execute("SELECT pedido, encerramento FROM episodio_piloto WHERE id='P03'").fetchone(), ('2016-09-16', None))
             self.assertEqual(db.execute('PRAGMA foreign_key_check').fetchall(), [])
-            self.assertEqual(db.execute('SELECT COUNT(*) FROM episodio_piloto WHERE cnpj IS NULL').fetchone()[0], 6)
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM episodio_piloto WHERE cnpj IS NULL').fetchone()[0], 0)
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM evidencia_campo').fetchone()[0], 23)
         with (self.root / 'episodios.csv').open() as file:
             self.assertEqual(len(list(csv.DictReader(file))), 6)
         self.assertIn('sem taxa nacional', (self.root / 'relatorio.md').read_text())
@@ -91,7 +93,7 @@ class PipelineTests(unittest.TestCase):
         original = (self.root / 'relatorio.md').read_bytes()
         self.assertEqual(first, build(ROOT / 'data', self.root))
         self.assertEqual(original, (self.root / 'relatorio.md').read_bytes())
-        with sqlite3.connect(self.root / 'piloto.sqlite3') as db:
+        with closing(sqlite3.connect(self.root / 'piloto.sqlite3')) as db:
             self.assertEqual(db.execute('SELECT COUNT(*) FROM episodio_piloto').fetchone()[0], 6)
 
     def test_invalid_input_does_not_replace_existing_outputs(self):
@@ -127,6 +129,30 @@ class PipelineTests(unittest.TestCase):
 
     def test_cli_missing_files_returns_failure(self):
         self.assertEqual(main(['--dados', str(self.root), 'validar']), 1)
+
+    def test_evidence_value_must_match_adopted_data(self):
+        evidence = load_evidence(ROOT / 'data')
+        evidence[0]['valor'] = '00000000000000'
+        self.assertTrue(any('diverge do valor' in e for e in validate_evidence(self.pilot, self.sources, evidence)))
+
+    def test_alternative_evidence_does_not_fill_unknown_date(self):
+        evidence = load_evidence(ROOT / 'data')
+        self.assertEqual(validate_evidence(self.pilot, self.sources, evidence), [])
+        viver = [e for e in evidence if e['episodio_id'] == 'P03' and e['campo'] == 'encerramento']
+        self.assertEqual({e['situacao'] for e in viver}, {'alternativa_pendente'})
+        self.assertIsNone(self.pilot['registros'][2]['encerramento'])
+
+    def test_evidence_must_reference_obtained_snapshot(self):
+        evidence = load_evidence(ROOT / 'data')
+        self.assertTrue(any('hash não encontrado' in e for e in validate_evidence(self.pilot, self.sources, evidence, [])))
+
+    def test_cvm_judicial_suffix_is_candidate_only(self):
+        path = self.root / 'cvm.csv'
+        path.write_text('CNPJ_CIA;DENOM_SOCIAL;CD_CVM\n76.535.764/0001-43;OI S.A. - EM RECUPERAÇÃO JUDICIAL;11312\n')
+        rows = cvm_candidates(path, self.pilot, self.root / 'out')
+        oi = next(r for r in rows if r['empresa_piloto'] == 'Oi S.A.')
+        self.assertEqual(oi['cnpj_candidato'], '76535764000143')
+        self.assertEqual(oi['revisao'], 'candidato_nao_confirmado')
 
 
 if __name__ == '__main__':

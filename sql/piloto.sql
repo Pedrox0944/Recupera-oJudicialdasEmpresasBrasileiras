@@ -35,6 +35,20 @@ CREATE TABLE IF NOT EXISTS episodio_fonte (
     PRIMARY KEY (episodio_id, fonte_id)
 );
 
+CREATE TABLE IF NOT EXISTS evidencia_campo (
+    id TEXT PRIMARY KEY,
+    episodio_id TEXT NOT NULL REFERENCES episodio_piloto(id),
+    campo TEXT NOT NULL,
+    valor TEXT NOT NULL,
+    fonte_id TEXT NOT NULL REFERENCES fonte(id),
+    localizacao TEXT NOT NULL,
+    consulta TEXT NOT NULL,
+    precisao TEXT NOT NULL,
+    situacao TEXT NOT NULL CHECK (situacao IN ('incorporada', 'alternativa_pendente')),
+    observacao TEXT NOT NULL,
+    sha256_fonte TEXT NOT NULL
+);
+
 CREATE VIEW IF NOT EXISTS vw_cobertura_piloto AS
 SELECT COUNT(*) AS episodios_pesquisados,
        COUNT(DISTINCT empresa) AS nomes_de_companhias,

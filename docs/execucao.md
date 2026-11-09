@@ -1,4 +1,12 @@
-# Execução local — versão 0.2
+# Execução local — versão 0.3
+
+## Visualizar os gráficos
+
+```sh
+python3 -m recuperacao painel
+```
+
+Abra `http://127.0.0.1:8501` no navegador. Mantenha o terminal em execução e encerre com `Ctrl+C`. No Windows: `py -3 -m recuperacao painel`. Se necessário, use `--porta 8502`. O painel lê os JSONs diretamente; não é necessário executar `gerar` antes. Filtros e download CSV operam sobre o recorte visível; Atualizar dados relê e valida a base local.
 
 Requisito: Python 3.10 ou superior com o módulo sqlite3. Esta primeira etapa usa a biblioteca padrão: não exige instalar pacotes, PostgreSQL ou Docker. A adoção de pandas fica para os tratamentos de bases maiores; PostgreSQL e Metabase continuam sendo o destino planejado.
 
@@ -19,6 +27,7 @@ Todos ficam em `outputs/`, fora do controle de versão:
 | Arquivo | Uso |
 |---|---|
 | relatorio.md | Cobertura e pendências legíveis no VS Code |
+| evidencias.csv | Evidência por campo, alternativas pendentes e hash da cópia utilizada |
 | resumo.json | Contagens, limitações e SHA-256 das entradas |
 | piloto.sqlite3 | Banco local com episódios, fontes e vínculos |
 | episodios.csv | Episódios sem preencher datas ou identidades desconhecidas |
@@ -40,7 +49,7 @@ Baixe o CSV do [cadastro oficial de companhias abertas](https://dados.cvm.gov.br
 python3 -m recuperacao cvm data/raw/cad_cia_aberta.csv
 ```
 
-O leitor aceita CSV separado por ponto e vírgula, em UTF-8 ou Latin-1. Usa `CNPJ_CIA`, `DENOM_SOCIAL` e `CD_CVM`. Gera `candidatos_cvm.csv` e `cvm_origem.json`, com hash do arquivo. Compara nomes após remover acentos, espaços e pontuação; não faz correspondência aproximada nem resolve nomes históricos. Sem correspondência exata, registra a pendência. CNPJs numéricos candidatos têm os dígitos verificadores conferidos; outros formatos exigem revisão fora deste validador do piloto histórico.
+O leitor aceita CSV separado por ponto e vírgula, em UTF-8 ou Latin-1. Usa `CNPJ_CIA`, `DENOM_SOCIAL` e `CD_CVM`. Gera `candidatos_cvm.csv` e `cvm_origem.json`, com hash do arquivo. Compara nomes após remover acentos, espaços, pontuação e o sufixo “- EM RECUPERAÇÃO JUDICIAL”; não faz correspondência aproximada nem resolve nomes históricos. Sem correspondência exata, registra a pendência. CNPJs numéricos candidatos têm os dígitos verificadores conferidos; outros formatos exigem revisão fora deste validador do piloto histórico.
 
 O cadastro atual não demonstra listagem na data do pedido. Nenhum candidato é gravado automaticamente no piloto. Conferir razão social histórica, identidade, processo e listagem antes de atualizar os dados. A integração auditada terá esquema e regras próprios; esta camada aceita apenas `pendente_validacao` e `nao_auditado`.
 
@@ -52,7 +61,7 @@ Com um PostgreSQL instalado e um banco escolhido, use a conexão configurada em 
 psql -v ON_ERROR_STOP=1 -f outputs/postgresql.sql
 ```
 
-O script cria o esquema `pesquisa_piloto` e substitui **somente o conteúdo das três tabelas do piloto nesse esquema**: `fonte`, `episodio_piloto` e `episodio_fonte`. Não usar essas tabelas para inserir pesquisa manual: elas são derivadas dos JSONs. Não executar em um esquema compartilhado com dados que precisem ser preservados. A execução é transacional e repetível.
+O script cria o esquema `pesquisa_piloto` e substitui **somente o conteúdo das quatro tabelas do piloto nesse esquema**: `fonte`, `episodio_piloto`, `episodio_fonte` e `evidencia_campo`. Não usar essas tabelas para inserir pesquisa manual: elas são derivadas dos JSONs. Não executar em um esquema compartilhado com dados que precisem ser preservados. A execução é transacional e repetível.
 
 No Metabase, quando instalado, conectar um usuário com acesso de leitura e criar cartões a partir de `pesquisa_piloto.vw_cobertura_piloto` e uma tabela a partir de `pesquisa_piloto.vw_pendencias_piloto`. O usuário de leitura deve ser provisionado pelo administrador do banco; este projeto não cria contas nem armazena senhas.
 
@@ -60,6 +69,10 @@ As visões apresentam pesquisa e qualidade, sem proporção de sucesso ou duraç
 
 ## Limites de validação
 
-O validador confere IDs, relações com fontes, CNPJ numérico quando informado, formato do número CNJ, datas ISO, ordem temporal, ano/mês e corte. Não verifica dígitos do processo CNJ, autenticidade documental, listagem histórica ou situação jurídica. As evidências atuais estão vinculadas ao episódio, ainda não a cada campo.
+O validador confere IDs, relações com fontes, CNPJ numérico quando informado, formato do número CNJ, datas ISO, ordem temporal, ano/mês e corte. Não verifica dígitos do processo CNJ, autenticidade documental, listagem histórica ou situação jurídica. As evidências acrescentadas na versão 0.3 são vinculadas ao campo e ao hash da cópia consultada. Campos herdados ainda sem evidência específica continuam nas pendências. Os valores incorporados precisam coincidir com o registro de evidência, e o hash precisa existir em `data/coletas.json`.
 
 Referências técnicas: [sqlite3 do Python](https://docs.python.org/3/library/sqlite3.html) e [visões do PostgreSQL](https://www.postgresql.org/docs/current/sql-createview.html).
+
+## Coleta e revisão documental
+
+O comando `python3 -m recuperacao coletar S10 S11` baixa as fontes indicadas, mantém versões por hash e registra o resultado em `data/raw/coletas/manifesto.jsonl`. O registro versionado das cópias utilizadas nas evidências está em `data/coletas.json`. Coletar não altera esse registro nem os fatos automaticamente. Instruções e resultados em [importacao.md](importacao.md).

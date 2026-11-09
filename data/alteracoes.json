@@ -1,0 +1,310 @@
+{
+  "data": "2026-11-09",
+  "origem": "historico/piloto_v0_1.json",
+  "alteracoes": [
+    {
+      "episodio_id": "P01",
+      "campo": "fontes",
+      "anterior": [
+        "S01"
+      ],
+      "novo": [
+        "S01",
+        "S10",
+        "S11"
+      ],
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P01",
+      "campo": "cnpj",
+      "anterior": null,
+      "novo": "76535764000143",
+      "evidencias": [
+        "E001",
+        "E007"
+      ]
+    },
+    {
+      "episodio_id": "P02",
+      "campo": "pedido",
+      "anterior": null,
+      "novo": "2023-03-01",
+      "evidencias": [
+        "E009"
+      ]
+    },
+    {
+      "episodio_id": "P02",
+      "campo": "processo",
+      "anterior": null,
+      "novo": "0090940-03.2023.8.19.0001",
+      "evidencias": [
+        "E010"
+      ]
+    },
+    {
+      "episodio_id": "P02",
+      "campo": "fontes",
+      "anterior": [
+        "S02"
+      ],
+      "novo": [
+        "S02",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P02",
+      "campo": "observacao",
+      "anterior": "Não classificar como em andamento: falta atualização até o corte.",
+      "novo": "Pedido confirmado em documento de 11/10/2023. Processo migrado para DCP em 18/09/2023, sem criar novo episódio. Situação no corte ainda não auditada.",
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P02",
+      "campo": "cnpj",
+      "anterior": null,
+      "novo": "76535764000143",
+      "evidencias": [
+        "E002",
+        "E008"
+      ]
+    },
+    {
+      "episodio_id": "P03",
+      "campo": "pedido",
+      "anterior": null,
+      "novo": "2016-09-16",
+      "evidencias": [
+        "E011"
+      ]
+    },
+    {
+      "episodio_id": "P03",
+      "campo": "deferimento",
+      "anterior": null,
+      "novo": "2016-09-29",
+      "evidencias": [
+        "E012"
+      ]
+    },
+    {
+      "episodio_id": "P03",
+      "campo": "processo",
+      "anterior": null,
+      "novo": "1103236-83.2016.8.26.0100",
+      "evidencias": [
+        "E013"
+      ]
+    },
+    {
+      "episodio_id": "P03",
+      "campo": "fontes",
+      "anterior": [
+        "S03"
+      ],
+      "novo": [
+        "S03",
+        "S10",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P03",
+      "campo": "observacao",
+      "anterior": "Precisão anual; obter sentença e datas exatas.",
+      "novo": "Pedido, deferimento e processo confirmados no relatório da administradora judicial. Fontes reportam sentença em 02/08/2021 e encerramento em 17/12/2021; campo encerramento mantido nulo até distinguir marcos. Ver evidencias.json.",
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P03",
+      "campo": "cnpj",
+      "anterior": null,
+      "novo": "67571414000141",
+      "evidencias": [
+        "E003"
+      ]
+    },
+    {
+      "episodio_id": "P04",
+      "campo": "processo",
+      "anterior": null,
+      "novo": "1050924-67.2015.8.26.0100",
+      "evidencias": [
+        "E016"
+      ]
+    },
+    {
+      "episodio_id": "P04",
+      "campo": "fontes",
+      "anterior": [
+        "S04"
+      ],
+      "novo": [
+        "S04",
+        "S10",
+        "S16"
+      ],
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P04",
+      "campo": "cnpj",
+      "anterior": null,
+      "novo": "89463822000112",
+      "evidencias": [
+        "E004"
+      ]
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "encerramento",
+      "anterior": null,
+      "novo": "2024-08-09",
+      "evidencias": [
+        "E018"
+      ]
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "ano_encerramento",
+      "anterior": null,
+      "novo": 2024,
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "processo",
+      "anterior": null,
+      "novo": "1030930-48.2018.8.26.0100",
+      "evidencias": [
+        "E017"
+      ]
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "evento",
+      "anterior": "pedido_reportado",
+      "novo": "encerramento_reportado",
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "fontes",
+      "anterior": [
+        "S05"
+      ],
+      "novo": [
+        "S05",
+        "S10",
+        "S18",
+        "S17"
+      ],
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "observacao",
+      "anterior": "Desfecho não apurado. Ausência da data de encerramento não significa processo em curso.",
+      "novo": "Sentença de encerramento de 09/08/2024 conferida em cópia disponibilizada pelo RI. Elegibilidade histórica, recursos e acompanhamento até o corte pendentes.",
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P05",
+      "campo": "cnpj",
+      "anterior": null,
+      "novo": "61092037000181",
+      "evidencias": [
+        "E005",
+        "E019"
+      ]
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "pedido",
+      "anterior": null,
+      "novo": "2019-10-16",
+      "evidencias": [
+        "E021"
+      ]
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "deferimento",
+      "anterior": null,
+      "novo": "2019-10-16",
+      "evidencias": [
+        "E022"
+      ]
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "encerramento",
+      "anterior": null,
+      "novo": "2025-02-12",
+      "evidencias": [
+        "E023"
+      ]
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "ano_encerramento",
+      "anterior": null,
+      "novo": 2025,
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "processo",
+      "anterior": null,
+      "novo": "1103257-54.2019.8.26.0100",
+      "evidencias": [
+        "E020"
+      ]
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "evento",
+      "anterior": "condicao_rj_reportada",
+      "novo": "encerramento_reportado",
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "fontes",
+      "anterior": [
+        "S06"
+      ],
+      "novo": [
+        "S06",
+        "S10",
+        "S19",
+        "S20"
+      ],
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "observacao",
+      "anterior": "B3 confirma RJ em 17/10/2019; buscar petição e desfecho. Data da publicação não é data do pedido.",
+      "novo": "Relatório da administradora confirma pedido e deferimento em 16/10/2019. Comunicado reporta sentença de encerramento em 12/02/2025; sentença original, recursos e acompanhamento no corte pendentes.",
+      "evidencias": []
+    },
+    {
+      "episodio_id": "P06",
+      "campo": "cnpj",
+      "anterior": null,
+      "novo": "08534605000174",
+      "evidencias": [
+        "E006"
+      ]
+    }
+  ]
+}

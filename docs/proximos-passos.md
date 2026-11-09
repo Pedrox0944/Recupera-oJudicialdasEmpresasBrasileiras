@@ -16,3 +16,7 @@ A camada piloto tem importação validada em SQLite, exportações CSV, relatór
 
 ## Critério de conclusão da versão analítica
 Identidades e elegibilidade auditadas; nenhum resultado sem evidência; denominadores reproduzíveis; nulos explícitos; painel coerente com consultas; limitações visíveis; nenhuma credencial no pacote. A pesquisa 0.1 conclui apenas o piloto e o desenho; as ferramentas 0.2 acrescentam execução local e qualidade, sem concluir a versão analítica.
+
+## Avanço na versão 0.3
+
+Identidades cadastrais revisadas, processos e datas dos pedidos preenchidos com fontes externas; onze coletas preservadas e 23 evidências por campo registradas. A prioridade passa a listagem histórica, recursos e status no corte, conciliação dos marcos da Viver e evidência dos campos herdados. Consulte `importacao.md`.

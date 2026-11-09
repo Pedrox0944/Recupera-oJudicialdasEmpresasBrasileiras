@@ -1,0 +1,123 @@
+[
+  {
+    "fonte_id": "S10",
+    "url": "https://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv",
+    "obtido_em": "2026-11-09T18:01:31.008521+00:00",
+    "status": "obtida",
+    "arquivo": "S10-4364c52c1102d94db8e99ecc67a038350e5936c9aa298802fcebb76349a58121.csv",
+    "sha256": "4364c52c1102d94db8e99ecc67a038350e5936c9aa298802fcebb76349a58121",
+    "bytes": 1494679,
+    "content_type": "application/octet-stream",
+    "url_final": "https://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv"
+  },
+  {
+    "fonte_id": "S11",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/6aebbd40-9373-4b5a-8461-9839bd41cbbb/489b8f34-44e7-2b13-47b4-f729bc694efe?origin=1",
+    "obtido_em": "2026-11-09T18:01:31.836352+00:00",
+    "status": "obtida",
+    "arquivo": "S11-1869b3b6181002eb7a14fd682565b38c41324261f0e9829a55e78ca16af4ac1f.pdf",
+    "sha256": "1869b3b6181002eb7a14fd682565b38c41324261f0e9829a55e78ca16af4ac1f",
+    "bytes": 380941,
+    "content_type": "application/pdf",
+    "url_final": "https://api.mziq.com/mzfilemanager/v2/d/6aebbd40-9373-4b5a-8461-9839bd41cbbb/489b8f34-44e7-2b13-47b4-f729bc694efe?origin=1"
+  },
+  {
+    "fonte_id": "S12",
+    "url": "https://recuperacaojudicialoi.com.br/inicio-2/principal-2/",
+    "obtido_em": "2026-11-09T18:01:33.068206+00:00",
+    "status": "obtida",
+    "arquivo": "S12-1e1fd9e9790491d08c69d9a0581e6282c05ec2e4eb1f473b4f72c9f940fe297c.html",
+    "sha256": "1e1fd9e9790491d08c69d9a0581e6282c05ec2e4eb1f473b4f72c9f940fe297c",
+    "bytes": 236132,
+    "content_type": "text/html; charset=UTF-8",
+    "url_final": "https://recuperacaojudicialoi.com.br/inicio-2/principal-2/"
+  },
+  {
+    "fonte_id": "S13",
+    "url": "https://midia.kpmg.com.br/digital-marketing/pdfs/grupo-viver/relatorio-circunstanciado-viver.pdf",
+    "obtido_em": "2026-11-09T18:01:34.661043+00:00",
+    "status": "obtida",
+    "arquivo": "S13-fd18d0cfd852a7a46af425c1e634452da59207fded32f284a4a8862f2cb24dde.pdf",
+    "sha256": "fd18d0cfd852a7a46af425c1e634452da59207fded32f284a4a8862f2cb24dde",
+    "bytes": 1207300,
+    "content_type": "application/pdf",
+    "url_final": "https://midia.kpmg.com.br/digital-marketing/pdfs/grupo-viver/relatorio-circunstanciado-viver.pdf"
+  },
+  {
+    "fonte_id": "S14",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/da542117-e804-406e-8d78-1dff343916bc/529ba985-b50b-1bce-b81a-30f01bfcab74?origin=1",
+    "obtido_em": "2026-11-09T18:01:36.082260+00:00",
+    "status": "obtida",
+    "arquivo": "S14-f369a4c3e6c6654650ba8d98ecdfff43f39ab812c348bfa537f1976a259091bb.pdf",
+    "sha256": "f369a4c3e6c6654650ba8d98ecdfff43f39ab812c348bfa537f1976a259091bb",
+    "bytes": 227863,
+    "content_type": "application/pdf",
+    "url_final": "https://api.mziq.com/mzfilemanager/v2/d/da542117-e804-406e-8d78-1dff343916bc/529ba985-b50b-1bce-b81a-30f01bfcab74?origin=1"
+  },
+  {
+    "fonte_id": "S15",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/da542117-e804-406e-8d78-1dff343916bc/1530eb52-c813-86d5-733e-18b5aa242847?origin=1",
+    "obtido_em": "2026-11-09T18:01:38.037829+00:00",
+    "status": "obtida",
+    "arquivo": "S15-2651212c4853442bffb601514a5559fd53c0444ec6d167d3f26b5460b1e7abf1.pdf",
+    "sha256": "2651212c4853442bffb601514a5559fd53c0444ec6d167d3f26b5460b1e7abf1",
+    "bytes": 1520867,
+    "content_type": "application/pdf",
+    "url_final": "https://api.mziq.com/mzfilemanager/v2/d/da542117-e804-406e-8d78-1dff343916bc/1530eb52-c813-86d5-733e-18b5aa242847?origin=1"
+  },
+  {
+    "fonte_id": "S16",
+    "url": "https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=2S000GWQT0000&processo.foro=1",
+    "obtido_em": "2026-11-09T18:01:39.906711+00:00",
+    "status": "obtida",
+    "arquivo": "S16-be758716945e9f24777e4cafc78d46dcaa73ce0e3746172d44907dba3976230f.html",
+    "sha256": "be758716945e9f24777e4cafc78d46dcaa73ce0e3746172d44907dba3976230f",
+    "bytes": 666482,
+    "content_type": "text/html;charset=UTF-8",
+    "url_final": "https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=2S000GWQT0000&processo.foro=1"
+  },
+  {
+    "fonte_id": "S17",
+    "url": "https://ri.eternit.com.br/Download.aspx?Arquivo=2b%2FZu51K86EIbu6lg5q%2FQQ%3D%3D",
+    "obtido_em": "2026-11-09T18:01:43.498762+00:00",
+    "status": "obtida",
+    "arquivo": "S17-7a0d3488dfc0dd0e6f42099306bca92e7d85f13cf60ceca6d5bebe92628e0908.pdf",
+    "sha256": "7a0d3488dfc0dd0e6f42099306bca92e7d85f13cf60ceca6d5bebe92628e0908",
+    "bytes": 132401,
+    "content_type": "application/pdf",
+    "url_final": "https://ri.eternit.com.br/Download.aspx?Arquivo=2b%2FZu51K86EIbu6lg5q%2FQQ%3D%3D"
+  },
+  {
+    "fonte_id": "S18",
+    "url": "https://ri.eternit.com.br/Download.aspx?Arquivo=RMHUj4vQ%2FQny4yFWyx8AVA%3D%3D",
+    "obtido_em": "2026-11-09T18:01:44.811274+00:00",
+    "status": "obtida",
+    "arquivo": "S18-fb5cf469252547a36cbafb99e11a78e9a4522d4e91846e159e0bc33d7dbf80c1.pdf",
+    "sha256": "fb5cf469252547a36cbafb99e11a78e9a4522d4e91846e159e0bc33d7dbf80c1",
+    "bytes": 44394,
+    "content_type": "application/pdf",
+    "url_final": "https://ri.eternit.com.br/Download.aspx?Arquivo=RMHUj4vQ%2FQny4yFWyx8AVA%3D%3D"
+  },
+  {
+    "fonte_id": "S19",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/4208c3ab-ee07-4344-b70f-f03d3fecbcc3/320fc30f-879c-0c90-5065-5aba9ca1fe78?origin=1",
+    "obtido_em": "2026-11-09T18:01:45.676481+00:00",
+    "status": "obtida",
+    "arquivo": "S19-04976befde07cf88a7572aaedbdfed487cf803c9ed22bcc5698a9c10126216a8.pdf",
+    "sha256": "04976befde07cf88a7572aaedbdfed487cf803c9ed22bcc5698a9c10126216a8",
+    "bytes": 1377705,
+    "content_type": "application/pdf",
+    "url_final": "https://api.mziq.com/mzfilemanager/v2/d/4208c3ab-ee07-4344-b70f-f03d3fecbcc3/320fc30f-879c-0c90-5065-5aba9ca1fe78?origin=1"
+  },
+  {
+    "fonte_id": "S20",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/4208c3ab-ee07-4344-b70f-f03d3fecbcc3/402188d8-0adf-8ee8-7bef-2bc759b05104?origin=1",
+    "obtido_em": "2026-11-09T18:01:46.898754+00:00",
+    "status": "obtida",
+    "arquivo": "S20-012e9a925597fb5a066bf2cc134a7df46f5f795cb0a01b0c0db5715010bdcefd.pdf",
+    "sha256": "012e9a925597fb5a066bf2cc134a7df46f5f795cb0a01b0c0db5715010bdcefd",
+    "bytes": 208661,
+    "content_type": "application/pdf",
+    "url_final": "https://api.mziq.com/mzfilemanager/v2/d/4208c3ab-ee07-4344-b70f-f03d3fecbcc3/402188d8-0adf-8ee8-7bef-2bc759b05104?origin=1"
+  }
+]

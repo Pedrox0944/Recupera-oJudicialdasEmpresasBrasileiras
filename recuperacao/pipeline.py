@@ -6,6 +6,7 @@ import io
 import json
 import re
 import sqlite3
+from contextlib import closing
 from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -17,6 +18,65 @@ COLUMNS = (
     'status_no_corte', 'elegibilidade', 'uso', 'observacao', 'data_corte',
 )
 WARNING = 'Pesquisa exploratória — sem taxa nacional'
+EVIDENCE_COLUMNS = ('id', 'episodio_id', 'campo', 'valor', 'fonte_id', 'localizacao',
+                    'consulta', 'precisao', 'situacao', 'observacao', 'sha256_fonte')
+
+
+def load_evidence(data_dir):
+    path = Path(data_dir) / 'evidencias.json'
+    return json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
+
+
+def validate_evidence(pilot, sources, evidence, snapshots=None):
+    errors = []
+    if not isinstance(evidence, list):
+        return ['evidencias.json deve conter uma lista.']
+    rows = {r['id']: r for r in pilot['registros']}
+    source_ids = {s['id'] for s in sources}
+    seen = set()
+    for item in evidence:
+        if not isinstance(item, dict) or any(not isinstance(item.get(k), str) or not item[k].strip() for k in EVIDENCE_COLUMNS):
+            errors.append('Evidência deve ter todos os campos textuais preenchidos.')
+            continue
+        eid = item['id']
+        if eid in seen:
+            errors.append(f'{eid}: evidência duplicada.')
+        seen.add(eid)
+        row = rows.get(item['episodio_id'])
+        if row is None or item['fonte_id'] not in source_ids:
+            errors.append(f'{eid}: episódio ou fonte inexistente.')
+            continue
+        if item['fonte_id'] not in row['fontes']:
+            errors.append(f'{eid}: fonte não vinculada ao episódio.')
+        if item['campo'] not in COLUMNS:
+            errors.append(f'{eid}: campo desconhecido.')
+        if item['situacao'] not in ('incorporada', 'alternativa_pendente'):
+            errors.append(f'{eid}: situação desconhecida.')
+        if item['situacao'] == 'incorporada' and str(row.get(item['campo'])) != item['valor']:
+            errors.append(f'{eid}: evidência diverge do valor incorporado.')
+        if item['precisao'] not in ('dia', 'mes', 'ano', 'identificador'):
+            errors.append(f'{eid}: precisão inválida.')
+        if not re.fullmatch(r'[0-9a-f]{64}', item['sha256_fonte']):
+            errors.append(f'{eid}: hash de origem inválido.')
+        if snapshots is not None and not any(
+            s.get('fonte_id') == item['fonte_id'] and s.get('sha256') == item['sha256_fonte']
+            and s.get('status') == 'obtida' for s in snapshots
+        ):
+            errors.append(f'{eid}: hash não encontrado no registro de coletas.')
+        try:
+            date.fromisoformat(item['consulta'])
+        except ValueError:
+            errors.append(f'{eid}: consulta inválida.')
+    return errors
+
+
+def check_evidence(data_dir, pilot, sources):
+    evidence = load_evidence(data_dir)
+    path = Path(data_dir) / 'coletas.json'
+    snapshots = json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
+    if not isinstance(snapshots, list) or any(not isinstance(s, dict) for s in snapshots):
+        return evidence, ['coletas.json deve conter uma lista de objetos.']
+    return evidence, validate_evidence(pilot, sources, evidence, snapshots)
 
 
 def load(data_dir):
@@ -169,7 +229,7 @@ def validate(pilot, sources):
     return errors
 
 
-def quality(pilot):
+def quality(pilot, evidence=()):
     result = []
     for row in pilot['registros']:
         missing = []
@@ -180,8 +240,14 @@ def quality(pilot):
         ):
             if row.get(field) is None:
                 missing.append(label)
-        missing.extend(('listagem histórica pendente', 'status no corte não auditado',
-                        'evidência por campo pendente'))
+        missing.extend(('listagem histórica pendente', 'status no corte não auditado'))
+        supported = {e['campo'] for e in evidence if e['episodio_id'] == row['id'] and e['situacao'] == 'incorporada'}
+        unsupported = [f for f in ('cnpj', 'processo', 'pedido', 'deferimento', 'encerramento')
+                       if row.get(f) is not None and f not in supported]
+        if unsupported:
+            missing.append('evidência por campo pendente: ' + ', '.join(unsupported))
+        if any(e['episodio_id'] == row['id'] and e['situacao'] == 'alternativa_pendente' for e in evidence):
+            missing.append('marcos divergentes nas fontes; revisão documental necessária')
         result.append({'id': row['id'], 'empresa': row['empresa'],
                        'pendencias': '; '.join(missing)})
     return result
@@ -210,6 +276,10 @@ def build(data_dir, output):
     """Reconstrói artefatos derivados; jamais altera dados de origem."""
     pilot, sources = load(data_dir)
     errors = validate(pilot, sources)
+    evidence = []
+    if not errors:
+        evidence, evidence_errors = check_evidence(data_dir, pilot, sources)
+        errors.extend(evidence_errors)
     if errors:
         raise ValueError('\n'.join(errors))
     output = Path(output)
@@ -217,7 +287,7 @@ def build(data_dir, output):
     rows = normalized_rows(pilot)
     schema = (ROOT / 'sql/piloto.sql').read_text(encoding='utf-8')
     # O banco é um artefato inteiramente derivado, reconstruído em memória.
-    with sqlite3.connect(':memory:') as database:
+    with closing(sqlite3.connect(':memory:')) as database:
         database.execute('PRAGMA foreign_keys = ON')
         database.executescript(schema)
         for source in sources:
@@ -229,15 +299,18 @@ def build(data_dir, output):
                              tuple(row.get(k) for k in COLUMNS))
             database.executemany('INSERT INTO episodio_fonte VALUES (?, ?)',
                                  [(row['id'], ref) for ref in row['fontes']])
+        database.executemany('INSERT INTO evidencia_campo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                             [tuple(e[k] for k in EVIDENCE_COLUMNS) for e in evidence])
         database.commit()
-        with sqlite3.connect(output / 'piloto.sqlite3') as destination:
+        with closing(sqlite3.connect(output / 'piloto.sqlite3')) as destination:
             database.backup(destination)
         database.row_factory = sqlite3.Row
         coverage = dict(database.execute('SELECT * FROM vw_cobertura_piloto').fetchone())
 
     write_csv(output / 'episodios.csv', COLUMNS, rows)
     write_csv(output / 'fontes.csv', ('id', 'titulo', 'url', 'escopo', 'consulta'), sources)
-    pending = quality(pilot)
+    pending = quality(pilot, evidence)
+    write_csv(output / 'evidencias.csv', EVIDENCE_COLUMNS, evidence)
     write_csv(output / 'pendencias.csv', ('id', 'empresa', 'pendencias'), pending)
     links = [{'episodio_id': r['id'], 'fonte_id': ref} for r in rows for ref in r['fontes']]
     write_csv(output / 'episodio_fonte.csv', ('episodio_id', 'fonte_id'), links)
@@ -247,11 +320,13 @@ def build(data_dir, output):
                   'CREATE SCHEMA IF NOT EXISTS pesquisa_piloto;',
                   'SET LOCAL search_path TO pesquisa_piloto;',
                   schema.replace('CREATE VIEW IF NOT EXISTS', 'CREATE OR REPLACE VIEW'),
-                  'DELETE FROM episodio_fonte;', 'DELETE FROM episodio_piloto;', 'DELETE FROM fonte;']
+                  'DELETE FROM evidencia_campo;', 'DELETE FROM episodio_fonte;',
+                  'DELETE FROM episodio_piloto;', 'DELETE FROM fonte;']
     for table, columns, records in (
         ('fonte', ('id', 'titulo', 'url', 'escopo', 'consulta'), sources),
         ('episodio_piloto', COLUMNS, rows),
         ('episodio_fonte', ('episodio_id', 'fonte_id'), links),
+        ('evidencia_campo', EVIDENCE_COLUMNS, evidence),
     ):
         for row in records:
             values = ', '.join(sql_literal(row.get(k)) for k in columns)
@@ -260,20 +335,21 @@ def build(data_dir, output):
     (output / 'postgresql.sql').write_text('\n'.join(statements) + '\n', encoding='utf-8')
 
     manifest = {
-        'versao': '0.2.0', 'aviso': WARNING, 'data_corte': pilot['data_corte_proposta'],
+        'versao': '0.3.0', 'aviso': WARNING, 'data_corte': pilot['data_corte_proposta'],
         'cobertura': pilot['cobertura'], 'contagens': coverage,
         'indicadores_juridicos': None,
-        'bloqueio': 'Elegibilidade, identidade e desfechos ainda não auditados.',
+        'bloqueio': 'Listagem histórica, recursos e status no corte ainda não auditados.',
         'sha256_entradas': {
             name: hashlib.sha256((Path(data_dir) / name).read_bytes()).hexdigest()
-            for name in ('piloto.json', 'fontes.json')
+            for name in ('piloto.json', 'fontes.json', 'evidencias.json', 'coletas.json')
+            if (Path(data_dir) / name).exists()
         },
     }
     (output / 'resumo.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     lines = ['# Relatório de cobertura — Recuperação em Foco', '', WARNING, '',
-             f"Corte proposto: {pilot['data_corte_proposta']}. Versão da ferramenta: 0.2.0.",
+             f"Corte proposto: {pilot['data_corte_proposta']}. Versão da ferramenta: 0.3.0.",
              f"Cobertura: {pilot['cobertura']}.", '',
-             f"- Nomes de companhias pesquisadas: {coverage['nomes_de_companhias']} (identidade cadastral pendente).",
+             f"- Nomes de companhias pesquisadas: {coverage['nomes_de_companhias']} (listagem histórica ainda pendente).",
              f"- Episódios candidatos: {coverage['episodios_pesquisados']}.",
              f"- Episódios sem CNPJ normalizado: {coverage['episodios_sem_cnpj']}.",
              f"- Episódios sem processo identificado: {coverage['episodios_sem_processo']}.",
@@ -284,7 +360,7 @@ def build(data_dir, output):
     for item in pending:
         lines.extend([f"### {item['id']} — {item['empresa']}", '', item['pendencias'] + '.', ''])
     lines.extend(['## Rastreabilidade', '',
-                  'Os vínculos com fontes são herdados do piloto; não constituem revisão dos documentos originais.',
+                  'evidencias.csv registra os campos conferidos, localização, fonte e alternativas pendentes. Campos sem registro continuam sem revisão específica.',
                   'Consulta e corte são metadados de origem; executar a ferramenta não atualiza a auditoria.',
                   'Os hashes das entradas estão em resumo.json. Nulos permanecem desconhecidos.', ''])
     (output / 'relatorio.md').write_text('\n'.join(lines), encoding='utf-8')
@@ -297,7 +373,8 @@ def cvm_candidates(csv_path, pilot, output):
 
     def normalize(name):
         ascii_name = unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode()
-        return re.sub(r'[^A-Z0-9]', '', ascii_name.upper())
+        name = re.sub(r'\s*-\s*EM RECUPERACAO JUDICIAL\s*$', '', ascii_name.upper())
+        return re.sub(r'[^A-Z0-9]', '', name)
 
     raw = Path(csv_path).read_bytes()
     try:
@@ -328,6 +405,6 @@ def cvm_candidates(csv_path, pilot, output):
     write_csv(output / 'candidatos_cvm.csv', tuple(candidates[0]), candidates)
     (output / 'cvm_origem.json').write_text(json.dumps({
         'arquivo': Path(csv_path).name, 'sha256': hashlib.sha256(raw).hexdigest(),
-        'metodo': 'Nome exato após normalização; sem confirmação automática de identidade ou listagem.',
+        'metodo': 'Nome normalizado e remoção do sufixo - EM RECUPERAÇÃO JUDICIAL; sem confirmação automática de identidade ou listagem.',
     }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return candidates

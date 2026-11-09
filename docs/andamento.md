@@ -9,7 +9,7 @@
 - Leitura de cadastro CVM local e sugestões de correspondência por nome.
 - Testes automatizados de integridade e geração.
 
-O piloto permanece com cinco nomes de companhias e seis episódios candidatos. Existem seis episódios sem CNPJ normalizado, cinco sem processo identificado e três sem data completa do pedido. Todos os status e a elegibilidade continuam não auditados. Nenhuma taxa de sucesso foi produzida.
+No encerramento da entrega 0.2, o piloto permanecia com cinco nomes de companhias e seis episódios candidatos. Naquela versão, havia seis episódios sem CNPJ normalizado, cinco sem processo identificado e três sem data completa do pedido. Todos os status e a elegibilidade continuam não auditados. Nenhuma taxa de sucesso foi produzida.
 
 ## Primeira coleta de cadastro
 
@@ -25,7 +25,7 @@ A comparação por nome normalizado gerou candidatos para Eternit, Lupatech, Ren
 
 O cadastro consultado é atual. Não demonstra que a companhia estava listada na data do pedido nem valida o processo judicial. Os candidatos ainda exigem revisão documental.
 
-## Próxima etapa de pesquisa
+## Próxima etapa de pesquisa (planejamento da versão 0.2)
 
 1. Revisar cada candidato de identidade; investigar a denominação da Oi no cadastro.
 2. Registrar evidência por campo, incluindo localização no documento, precisão da data e responsável pela revisão.
@@ -34,3 +34,11 @@ O cadastro consultado é atual. Não demonstra que a companhia estava listada na
 5. Executar a carga PostgreSQL e conectar o Metabase em ambiente com essas ferramentas disponíveis.
 
 PostgreSQL e Metabase não foram executados neste ambiente. A exportação SQL foi conferida pela geração e por testes de conteúdo, mas ainda precisa ser validada em um servidor PostgreSQL real.
+
+## Atualização — versão 0.3
+
+Foram coletadas onze fontes externas com cópias e SHA-256, revisadas as identidades cadastrais das cinco companhias e preenchidos CNPJ, processo e data do pedido dos seis episódios. Os números de pendências de identidade e datas acima descrevem a versão anterior. As contagens atuais desses três campos são zero ausências.
+
+Foram acrescentadas 23 evidências por campo, das quais duas registram marcos de encerramento da Viver ainda por conciliar. O piloto anterior e todas as alterações foram preservados. A Eternit recebeu encerramento histórico conferido em sentença; a Renova recebeu a data reportada pela companhia. Nenhum status no corte ou elegibilidade histórica foi promovido automaticamente.
+
+A coleta agora pode ser repetida pelo comando `coletar`. O banco e o SQL incluem a tabela `evidencia_campo`, e 26 testes passaram. Detalhes, fontes e próximas ações em [importacao.md](importacao.md). PostgreSQL e Metabase continuam sem execução neste ambiente.

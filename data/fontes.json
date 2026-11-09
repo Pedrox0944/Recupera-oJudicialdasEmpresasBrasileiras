@@ -61,5 +61,93 @@
     "url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11101compilado.htm",
     "escopo": "Marco legal; distinguir encerramento jurídico de recuperação econômica.",
     "consulta": "2026-11-09"
+  },
+  {
+    "id": "S10",
+    "titulo": "CVM — cadastro de companhias abertas, CSV",
+    "url": "https://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv",
+    "escopo": "Identidade cadastral: CNPJ, denominação e código CVM; não prova listagem histórica.",
+    "consulta": "2026-11-09",
+    "formato": "csv"
+  },
+  {
+    "id": "S11",
+    "titulo": "Oi — resposta ao Ofício B3 1134.2023-SLS, 11/10/2023",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/6aebbd40-9373-4b5a-8461-9839bd41cbbb/489b8f34-44e7-2b13-47b4-f729bc694efe?origin=1",
+    "escopo": "CNPJ no cabeçalho e pedido de 01/03/2023 na página 1.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S12",
+    "titulo": "Administrador judicial — segunda recuperação da Oi",
+    "url": "https://recuperacaojudicialoi.com.br/inicio-2/principal-2/",
+    "escopo": "Aviso de 18/09/2023 identifica número após migração; não presume novo episódio.",
+    "consulta": "2026-11-09",
+    "formato": "html"
+  },
+  {
+    "id": "S13",
+    "titulo": "KPMG — relatório circunstanciado Viver, 03/11/2021",
+    "url": "https://midia.kpmg.com.br/digital-marketing/pdfs/grupo-viver/relatorio-circunstanciado-viver.pdf",
+    "escopo": "Eventos relevantes, fls. 68242: processo, pedido e deferimento.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S14",
+    "titulo": "Viver — resposta à CVM, 17/11/2021",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/da542117-e804-406e-8d78-1dff343916bc/529ba985-b50b-1bce-b81a-30f01bfcab74?origin=1",
+    "escopo": "Página 2: sentença de 02/08/2021 ainda sem trânsito; não classificar status atual.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S15",
+    "titulo": "Viver — apresentação de resultados 2022",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/da542117-e804-406e-8d78-1dff343916bc/1530eb52-c813-86d5-733e-18b5aa242847?origin=1",
+    "escopo": "Seção 4, continuidade operacional: data de 17/12/2021; divergência com sentença reportada em S14 exige distinguir marcos.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S16",
+    "titulo": "TJSP — consulta pública da recuperação Lupatech",
+    "url": "https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=2S000GWQT0000&processo.foro=1",
+    "escopo": "Identifica processo e companhia; distribuição por direcionamento não equivale à data do pedido.",
+    "consulta": "2026-11-09",
+    "formato": "html"
+  },
+  {
+    "id": "S17",
+    "titulo": "Eternit — fato relevante de encerramento, 09/08/2024",
+    "url": "https://ri.eternit.com.br/Download.aspx?Arquivo=2b%2FZu51K86EIbu6lg5q%2FQQ%3D%3D",
+    "escopo": "CNPJ e processo; comunica encerramento. Conferir marco da decisão em S18.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S18",
+    "titulo": "TJSP — sentença Eternit disponibilizada pelo RI",
+    "url": "https://ri.eternit.com.br/Download.aspx?Arquivo=RMHUj4vQ%2FQny4yFWyx8AVA%3D%3D",
+    "escopo": "Processo e dispositivo de encerramento, com data e assinatura; recursos posteriores pendentes.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S19",
+    "titulo": "KPMG — relatório Renova juntado em 02/12/2024",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/4208c3ab-ee07-4344-b70f-f03d3fecbcc3/320fc30f-879c-0c90-5065-5aba9ca1fe78?origin=1",
+    "escopo": "Cronograma processual, fls. 61416: processo, pedido e deferimento.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
+  },
+  {
+    "id": "S20",
+    "titulo": "Renova — comunicado ao mercado, 28/02/2025",
+    "url": "https://api.mziq.com/mzfilemanager/v2/d/4208c3ab-ee07-4344-b70f-f03d3fecbcc3/402188d8-0adf-8ee8-7bef-2bc759b05104?origin=1",
+    "escopo": "Item Encerramento: sentença em 12/02/2025; divulgação de 13/02/2025 é marco diferente.",
+    "consulta": "2026-11-09",
+    "formato": "pdf"
   }
 ]
